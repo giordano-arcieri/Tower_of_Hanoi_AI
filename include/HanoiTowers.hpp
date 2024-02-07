@@ -24,6 +24,7 @@ public:
     // Precondition: None
     // Postcondition: It will retrun a vector of Moves that rappresent each move you should make to solve the problem. Meaning going from initial state to solution state.
     std::vector<Move> solve() const;
+    void execute_moves(std::vector<Move>); 
     void print() const;
     void moveDisk(int from, int to);
     HanoiTowers getSolutionState() const;

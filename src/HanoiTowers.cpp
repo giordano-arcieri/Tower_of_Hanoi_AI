@@ -2,6 +2,7 @@
 #include <iostream>
 #include <queue>
 #include <limits>
+#include <algorithm>
 
 HanoiTowers::HanoiTowers(int n)
 {
@@ -15,15 +16,17 @@ HanoiTowers::HanoiTowers(int n)
 std::vector<Move> HanoiTowers::solve() const
 {
     // This will solve the problem using BFS. We will search the graph to find the optimal solution.
-
+    std::cout << "Finding Solution\n";
     std::vector<Move> solution;                           // This will keep track of the states to go from initial state to solution state
     HanoiTowers solutionState = this->getSolutionState(); // This will be the solution to our problem
-
+    std::vector<HanoiTowers> viseted;
     // Check if the initial state is the solution state and if it is return solution
     if (solutionState == *this)
     {
+        std::cout << "Solution Found!\n";
         return solution;
     }
+    viseted.push_back(*this);
 
     // Create an OPEN queue with the initial node, I, (initial-state)
     std::queue<HanoiTowers> bsf_queue;
@@ -36,17 +39,38 @@ std::vector<Move> HanoiTowers::solve() const
     while (!(bsf_queue.empty() || outcome))
     {
         // Remove the first node from OPEN list, N
-        HanoiTowers N = bsf_queue.back();
+        HanoiTowers N = bsf_queue.front();
         bsf_queue.pop();
 
         // If N has successors then Generate the successors of N
         std::vector<HanoiTowers> successors = N.getSuccessors();
         if (!successors.empty())
         {
-            // Create pointers from the successors to N
-            // If a successor is a goal node
-            // Then OUTCOME=True
-            // Else add successors at end of OPEN list
+            for (auto successor : successors)
+            {
+                // Check if state has already been visited if it has continue
+                if (std::find(viseted.begin(), viseted.end(), successor) != viseted.end())
+                {
+                    continue;
+                }
+
+                // Visit node
+                viseted.push_back(successor);
+
+                // Create pointers from the successors to N
+
+                // If a successor is a goal node then OUTCOME=True
+                if (successor == solutionState)
+                {
+                    std::cout << "Solution Found!\n" << successor << std::endl;
+                    outcome = true;
+                }
+                // Else add successors at end of OPEN list
+                else
+                {
+                    bsf_queue.push(successor);
+                }
+            }
         }
     }
 
@@ -59,6 +83,7 @@ std::vector<Move> HanoiTowers::solve() const
     else
     {
         // This will never happen as this problem is alwasy solvable.
+        std::cout << "Solution Not Found!\n";
         return (std::vector<Move>){};
     }
 }
@@ -262,4 +287,13 @@ std::vector<HanoiTowers> HanoiTowers::getSuccessors() const
     }
 
     return successors;
+}
+
+void HanoiTowers::execute_moves(std::vector<Move> moves)
+{
+    std::cout << "Executing Moves...\n";
+    for (auto move : moves)
+    {
+        this->moveDisk(move.from, move.to);
+    }
 }
