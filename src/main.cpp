@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../include/HanoiTowers.hpp" // Assuming HanoiTower class is defined in HanoiTower.h
 
-const int NUMBER_OF_DISKS = 15;
+const int NUMBER_OF_DISKS = 12;
 
 int main()
 {
