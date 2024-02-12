@@ -50,7 +50,7 @@ make sure you are in the cloned directory as the above command is a relative pat
 
 ## Moving Forward
 
-Moving forward I want to create an interface where with any IS and any SS and any operands it can find a solution to the problem meaning the path form the IS to the SS using any searching algorithm you would like.
+Moving forward I want to create an interface where with any IS and any SS and any operands it can find a solution to the problem meaning the path from the IS to the SS using any searching algorithm you would like.
 
 The link to that future github repo will be pasted here when it is available: 
 
