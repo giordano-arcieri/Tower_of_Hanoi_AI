@@ -40,7 +40,7 @@ Here is the pseudo code using BFS:
 
 
 
-## Getting Started
+## Run the Code
 
 To run this program and test it you can simply clone this repository and compile all cpp files and run the executable.
 
@@ -55,12 +55,13 @@ Moving forward I want to create an interface where with any IS and any SS and an
 The link to that future github repo will be pasted here when it is available: 
 https://github.com/giordano-arcieri/General_AI_Problem_Solver.git
 
-### Prerequisites
+
+## Prerequisites
 
 g++ is the only prerequisite. You can also use gcc.
 
 
-### And code
+## Add Code
 
 You can modify the Constructor of the HanoiTower object to have any initial state you would like.
 
