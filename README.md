@@ -30,10 +30,8 @@ Here is the pseudo code using BFS:
                 
                 Create pointers from the successors/state to N
               
-                If a successor is a goal node then OUTCOME=True
+                If a successor is a goal state then OUTCOME=True
                
-                    
-                
                 Else add successors at end of OPEN list
                
     If OUTCOME = True then return the path from IS to successor
