@@ -41,6 +41,7 @@ Here is the pseudo code using BFS:
     Else there is no solution return anything (e.g. throw an exception)
 
 
+
 ## Getting Started
 
 To run this program and test it you can simply clone this repository and compile all cpp files and run the executable.
@@ -52,7 +53,9 @@ make sure you are in the cloned directory as the above command is a relative pat
 ## Moving Forward
 
 Moving forward I want to create an interface where with any IS and any SS and any operands it can find a solution to the problem meaning the path form the IS to the SS using any searching algorithm you would like.
+
 The link to that future github repo will be pasted here when it is available: 
+
 
 ### Prerequisites
 
@@ -62,7 +65,7 @@ g++ is the only prerequisite. You can also use gcc.
 ### And code
 
 You can modify the Constructor of the HanoiTower object to have any initial state you would like.
-You can modify the getSolution method of the HanoiTower object to have any solution state you would like.
+You can modify the getSolutionState method of the HanoiTower object to have any solution state you would like.
 You can modify the getSuccessors method of the HanoiTower object to have any "valid moves"/successors/operands you would like.
 
 
