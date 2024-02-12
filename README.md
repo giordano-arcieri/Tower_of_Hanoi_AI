@@ -53,7 +53,7 @@ make sure you are in the cloned directory as the above command is a relative pat
 Moving forward I want to create an interface where with any IS and any SS and any operands it can find a solution to the problem meaning the path from the IS to the SS using any searching algorithm you would like.
 
 The link to that future github repo will be pasted here when it is available: 
-
+https://github.com/giordano-arcieri/General_AI_Problem_Solver.git
 
 ### Prerequisites
 
