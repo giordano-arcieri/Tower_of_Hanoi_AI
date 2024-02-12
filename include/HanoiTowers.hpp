@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include <vector>
+#include "Node.hpp"
 
 // this struct is just to keep track of some moves. All we need to define a rule is the pillar you want to move the disk from and to.
 struct Move
@@ -20,15 +21,16 @@ private:
     int number_of_disks;
 
 public:
-    HanoiTowers(int n);
+    HanoiTowers(int n = 3);
     // Precondition: None
     // Postcondition: It will retrun a vector of Moves that rappresent each move you should make to solve the problem. Meaning going from initial state to solution state.
-    std::vector<Move> solve() const;
+    std::vector<HanoiTowers> solve() const;
     void execute_moves(std::vector<Move>); 
     void print() const;
     void moveDisk(int from, int to);
     HanoiTowers getSolutionState() const;
     std::vector<HanoiTowers> getSuccessors() const;
+    HanoiTowers& operator=(const HanoiTowers& other);
     bool operator==(const HanoiTowers& other) const;
     friend std::ostream &operator<<(std::ostream &os, const HanoiTowers &ht);  // output stream and hanoi towers is what the things stand for
 };

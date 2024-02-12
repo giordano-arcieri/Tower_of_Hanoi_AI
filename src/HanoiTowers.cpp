@@ -3,6 +3,8 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <chrono>
+#include <thread>
 
 HanoiTowers::HanoiTowers(int n)
 {
@@ -13,23 +15,37 @@ HanoiTowers::HanoiTowers(int n)
     }
 }
 
-std::vector<Move> HanoiTowers::solve() const
+HanoiTowers &HanoiTowers::operator=(const HanoiTowers &other)
 {
-    // This will solve the problem using BFS. We will search the graph to find the optimal solution.
-    std::cout << "Finding Solution\n";
-    std::vector<Move> solution;                           // This will keep track of the states to go from initial state to solution state
+    if (this != &other)
+    { // Protect against self-assignment
+        tower1 = other.tower1;
+        tower2 = other.tower2;
+        tower3 = other.tower3;
+        number_of_disks = other.number_of_disks;
+    }
+    return *this;
+}
+
+std::vector<HanoiTowers> HanoiTowers::solve() const
+{
+    // This will solve the problem using BFS. We will search the graph to find the optimal solution. Mantaings all paths with a tree structure.
+    std::cout << "Finding Solution...\n"; //!!!CHANGE TO LOGGING
+
+    std::vector<HanoiTowers> solution;                    // This will keep track of the states to go from initial state to solution state
     HanoiTowers solutionState = this->getSolutionState(); // This will be the solution to our problem
-    std::vector<HanoiTowers> viseted;
+    std::vector<HanoiTowers> viseted;                     // This will keep track of the states we have already visited
+
     // Check if the initial state is the solution state and if it is return solution
     if (solutionState == *this)
     {
         std::cout << "Solution Found!\n";
-        return solution;
+        return std::vector<HanoiTowers>{*this};
     }
     viseted.push_back(*this);
 
     // Create an OPEN queue with the initial node, I, (initial-state)
-    std::queue<HanoiTowers> bsf_queue;
+    std::queue<Node<HanoiTowers>> bsf_queue;
     bsf_queue.push(*this);
 
     // 2 OUTCOME=False
@@ -39,11 +55,11 @@ std::vector<Move> HanoiTowers::solve() const
     while (!(bsf_queue.empty() || outcome))
     {
         // Remove the first node from OPEN list, N
-        HanoiTowers N = bsf_queue.front();
+        Node<HanoiTowers> N = bsf_queue.front();
         bsf_queue.pop();
 
         // If N has successors then Generate the successors of N
-        std::vector<HanoiTowers> successors = N.getSuccessors();
+        std::vector<HanoiTowers> successors = N.value.getSuccessors();
         if (!successors.empty())
         {
             for (auto successor : successors)
@@ -58,17 +74,29 @@ std::vector<Move> HanoiTowers::solve() const
                 viseted.push_back(successor);
 
                 // Create pointers from the successors to N
+                Node<HanoiTowers> nodeSuccessor(successor);
+                nodeSuccessor.next = std::make_shared<Node<HanoiTowers>>(N);
 
                 // If a successor is a goal node then OUTCOME=True
                 if (successor == solutionState)
                 {
-                    std::cout << "Solution Found!\n" << successor << std::endl;
+                    std::cout << "Solution Found!\n";
+
+                    // Create a path from I to N through the pointers
+                    while (nodeSuccessor.next != nullptr)
+                    {
+                        solution.push_back(nodeSuccessor.value);
+                        nodeSuccessor = *nodeSuccessor.next;
+                    }
+                    solution.push_back(nodeSuccessor.value);
+
                     outcome = true;
                 }
+
                 // Else add successors at end of OPEN list
                 else
                 {
-                    bsf_queue.push(successor);
+                    bsf_queue.push(nodeSuccessor);
                 }
             }
         }
@@ -84,7 +112,7 @@ std::vector<Move> HanoiTowers::solve() const
     {
         // This will never happen as this problem is alwasy solvable.
         std::cout << "Solution Not Found!\n";
-        return (std::vector<Move>){};
+        return solution;
     }
 }
 

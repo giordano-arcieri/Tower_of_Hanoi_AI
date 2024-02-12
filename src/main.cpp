@@ -1,27 +1,17 @@
 #include <iostream>
-#include "../include/HanoiTowers.hpp" 
-#include "../include/Tree.hpp" 
-
-#define NUMBER_OF_DISKS 5
+#include "../include/HanoiTowers.hpp"
+#define NUMBER_OF_DISKS 8
 
 int main()
 {
-    HanoiTowers tower(NUMBER_OF_DISKS); // Instantiate a new HanoiTower object
-    
-    Tree<int> tree;
-    auto np = tree.createRoot(0);
-    auto np1 = tree.addChild(np, 1);
-    tree.addChild(np, 2);
-    auto am = tree.addChild(np, 3);
-    tree.addChild(am, 7);
+    HanoiTowers towers(NUMBER_OF_DISKS);
 
-    auto np2 = tree.addChild(np1, 4);
-    auto n = tree.addChild(np1, 5);
-    tree.addChild(n, 4.6);
-    tree.addChild(np1, 6);
+    std::vector<HanoiTowers> solution = towers.solve();
 
-    tree.printTree();
-
+    for (int i = solution.size(); i > 0; i--)
+    {
+        std::cout << "\nMove " << solution.size() - i << ":\n\n" << solution[i - 1] << "-----------------\n";
+    }
 
     return 0;
 }
