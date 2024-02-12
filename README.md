@@ -44,7 +44,7 @@ Here is the pseudo code using BFS:
 
 To run this program and test it you can simply clone this repository and compile all cpp files and run the executable.
 
-g++ src/*.cpp -o program && ./program
+'g++ src/*.cpp -o program && ./program'
 
 make sure you are in the cloned directory as the above command is a relative path.
 
@@ -61,7 +61,7 @@ https://github.com/giordano-arcieri/General_AI_Problem_Solver.git
 g++ is the only prerequisite. You can also use gcc.
 
 
-## Add Code
+## Modify Code
 
 You can modify the Constructor of the HanoiTower object to have any initial state you would like.
 
