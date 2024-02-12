@@ -65,7 +65,9 @@ g++ is the only prerequisite. You can also use gcc.
 ### And code
 
 You can modify the Constructor of the HanoiTower object to have any initial state you would like.
+
 You can modify the getSolutionState method of the HanoiTower object to have any solution state you would like.
+
 You can modify the getSuccessors method of the HanoiTower object to have any "valid moves"/successors/operands you would like.
 
 
