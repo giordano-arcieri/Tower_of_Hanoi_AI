@@ -44,7 +44,9 @@ Here is the pseudo code using BFS:
 
 To run this program and test it you can simply clone this repository and compile all cpp files and run the executable.
 
-'g++ src/*.cpp -o program && ./program'
+```
+g++ src/*.cpp -o program && ./program
+```
 
 make sure you are in the cloned directory as the above command is a relative path.
 
